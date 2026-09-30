@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Componyx.Data</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- NuGet Package Settings -->
+  <PropertyGroup>
+    <PackageId>Componyx.Data</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Componyx - E.H. Daanen</Authors>
+    <Company>Componyx</Company>
+    <Product>Componyx Data</Product>
+    <Description>A lightweight, database-first ORM for .NET built directly on ADO.NET. Write queries in T-SQL or a fluent syntax builder and get back fully mapped objects with relations included. Supports SQL Server, MySQL, PostgreSQL, Oracle and SQLite, no Entity Framework dependency.</Description>
+    <PackageTags>orm database sql ado.net data-access sql-server mysql postgresql oracle sqlite</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Componyx.Data</Title>
+    <Copyright>Copyright (c) Componyx - E.H. Daanen</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>Logo-small.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="" />
+    <None Include="..\Logo-small.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Componyx.Common" Version="1.0.3" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="IF EXIST &quot;$(ProjectDir)\..\Data\Utils\AssemblyInfoUtil.exe&quot; &quot;$(ProjectDir)\..\Data\Utils\AssemblyInfoUtil.exe&quot; -inc:4 &quot;$(ProjectDir)Properties\AssemblyInfo.cs&quot;" />
+  </Target>
+  
+</Project>
